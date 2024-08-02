@@ -26,7 +26,7 @@
                                     <tr>
                                         <td>{{ $blog->id }}</td>
                                         <td>{{ $blog->title }}</td>
-                                        <td>{{ Str::limit($blog->description, 50) }}</td>
+                                        <td>{!! Str::limit($blog->description, 50) !!}</td>
                                         <td>
                                             @if($blog->banner_image)
                                             <img src="{{ asset($blog->banner_image) }}" alt="Banner Image" style="width: 50px; height: 50px;">

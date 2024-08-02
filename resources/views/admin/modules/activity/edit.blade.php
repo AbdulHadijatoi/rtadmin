@@ -303,7 +303,7 @@
                                                 </span>
                                             @enderror
                                             <label for="exampleInputName1" class="mt-1">Description</label>
-                                            <textarea name="instructions[{{ $index }}][instruction_description]"
+                                            <textarea name="instructions[{{ $index }}][instruction_description]" id="editor5"
                                                 class="form-control @error('instructions.' . $index . '.instruction_description') is-invalid @enderror"
                                                 placeholder="Instruction Description" rows="6" cols="50">{{ $instruction->instruction_description }}</textarea>
                                             @error('instructions.' . $index . '.instruction_description')
@@ -372,7 +372,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="packageDescription{{ $index }}">Package Description</label>
-                                            <textarea class="form-control" id="packageDescription{{ $index }}" placeholder="Description"
+                                            <textarea class="form-control" id="packageDescription{{ $index }}" placeholder="Description" id="editor6"
                                                 name="packages[{{ $index }}][highlight]" rows="6" cols="50">{{ $package->highlight }}</textarea>
                                         </div>
                                     </div>

@@ -328,7 +328,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <textarea name="instructions[0][instruction_description]"
+                                        <textarea name="instructions[0][instruction_description]" id="editor5"
                                             class="form-control @error('instructions.0.description') is-invalid @enderror"
                                             placeholder="Instruction Description" rows="6" cols="50"></textarea>
                                         @error('instructions.0.description')
@@ -403,7 +403,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="packageDescription0">Package Description</label>
-                                    <textarea class="form-control @error('highlight') is-invalid @enderror" id="packageDescription0"
+                                    <textarea class="form-control @error('highlight') is-invalid @enderror" id="packageDescription0" id="editor6"
                                         placeholder="Description" name="packages[0][highlight]" rows="6" cols="50"></textarea>
                                     @error('highlight')
                                         <span class="invalid-feedback" role="alert">

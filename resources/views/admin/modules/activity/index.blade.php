@@ -19,7 +19,6 @@
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Category</th>
-                                            <th>Description</th>
                                             <th>Instructions</th>
                                             <th>Packages</th>
                                             <th>Action</th>
@@ -31,13 +30,6 @@
                                                 <td>{{ $value->id }}</td>
                                                 <td>{{ $value->name }}</td>
                                                 <td>{{ $value->category->name }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                                        data-target="#descriptionModal"
-                                                        data-description="{{ $value->description }}">
-                                                        Description
-                                                    </button>
-                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                         data-target="#instructionModal"
@@ -289,6 +281,7 @@
                     <tr><th>Start Time</th><td>${activity.start_time}</td></tr>
                     <tr><th>Cancellation Duration</th><td>${activity.cancellation_duration}</td></tr>
                     <tr><th>Features</th><td>${Array.isArray(activity.features) ? activity.features.join(', ') : activity.features}</td></tr>
+                    <tr><th>Description</th><td><div style="text-wrap:wrap;">${activity.description}</div></td></tr>
                 `;
 
                 modalBody.html(detailsContent);

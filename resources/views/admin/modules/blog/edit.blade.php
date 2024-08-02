@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="5" required>{{ $blog->description }}</textarea>
+                            <textarea class="form-control" rows="6" cols="50" id="editor5" name="description" rows="5" required>{{ $blog->description }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="banner_image">Banner Image</label>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-group">
                     <label for="content_descriptions[]">Content Description</label>
-                    <textarea class="form-control" name="content_descriptions[]" rows="3" required></textarea>
+                    <textarea class="form-control" rows="6" cols="50" id="editor6" name="content_descriptions[]" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="content_images[]">Content Image</label>

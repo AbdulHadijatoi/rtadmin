@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\BlogContent;
 use App\Models\Faq;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -54,6 +55,7 @@ class BlogController extends Controller
 
         $blog = Blog::create([
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
             'description' => $request->description,
             'banner_image' => $bannerImageAddress,
         ]);

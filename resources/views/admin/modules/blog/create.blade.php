@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Add Blog</h4>
-                    <form class="forms-sample" action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data" id="blog-form">
                         @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
@@ -24,7 +24,7 @@
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Description"></textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description" rows="6" cols="50" id="editor1"></textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="contents[0][description]">Content Description</label>
-                                    <textarea class="form-control" name="contents[0][description]" required></textarea>
+                                    <textarea class="form-control" name="contents[0][description]" rows="6" cols="50" id="editor2"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="contents[0][image]">Content Image</label>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="faqs[0][answer]">Answer</label>
-                                    <textarea class="form-control" name="faqs[0][answer]" required></textarea>
+                                    <textarea class="form-control" name="faqs[0][answer]"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -88,11 +88,17 @@
     document.addEventListener('DOMContentLoaded', function () {
         let contentIndex = 1;
         let faqIndex = 1;
+        let editorIndex = 3;
+
+        // Initialize CKEditor for existing textareas
+        const editors = [];
+        //ClassicEditor.create(document.querySelector('#editor1')).then(editor => editors.push(editor));
+        //ClassicEditor.create(document.querySelector('#editor2')).then(editor => editors.push(editor));
 
         document.getElementById('add-content').addEventListener('click', function () {
             const contentGroup = document.createElement('div');
             contentGroup.classList.add('content-group');
-
+            
             contentGroup.innerHTML = `
                 <div class="form-group">
                     <label for="contents[${contentIndex}][title]">Content Title</label>
@@ -100,7 +106,7 @@
                 </div>
                 <div class="form-group">
                     <label for="contents[${contentIndex}][description]">Content Description</label>
-                    <textarea class="form-control" name="contents[${contentIndex}][description]"  required></textarea>
+                    <textarea class="form-control" name="contents[${contentIndex}][description]" id="editor${editorIndex}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="contents[${contentIndex}][image]">Content Image</label>
@@ -108,9 +114,9 @@
                 </div>
             `;
             document.getElementById('contents').appendChild(contentGroup);
-
+            ClassicEditor.create(document.querySelector(`#editor${editorIndex}`)).then(editor => editors.push(editor));
+            editorIndex++;
             contentIndex++;
-
         });
 
         document.getElementById('add-faq').addEventListener('click', function () {
@@ -124,15 +130,21 @@
                 </div>
                 <div class="form-group">
                     <label for="faqs[${faqIndex}][answer]">Answer</label>
-                    <textarea class="form-control" name="faqs[${faqIndex}][answer]" required></textarea>
+                    <textarea class="form-control" name="faqs[${faqIndex}][answer]"></textarea>
                 </div>
             `;
             document.getElementById('faqs').appendChild(faqGroup);
+            ClassicEditor.create(document.querySelector(`#editor${editorIndex}`)).then(editor => editors.push(editor));
             faqIndex++;
         });
+
+        // Ensure CKEditor instances update their corresponding textareas before form submission
+        document.getElementById('blog-form').addEventListener('submit', function (event) {
+            editors.forEach(editor => {
+                editor.updateSourceElement();
+            });
+        });
     });
-
-
 </script>
 <script>
     const inputElement = document.querySelector('input[name="banner_image"]');
@@ -147,8 +159,4 @@
       }
     );
 </script>
-
-
-
-
 @endsection

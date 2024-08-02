@@ -17,17 +17,11 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Url</th>
                                             <th>Name</th>
-                                            <th>Page Title</th>
                                             <th>Category</th>
-                                            <th>Duration</th>
-                                            <th>Start Time</th>
-                                            <th>Cancellation Duration</th>
                                             <th>Description</th>
                                             <th>Instructions</th>
                                             <th>Packages</th>
-                                            <th>Features</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -35,18 +29,13 @@
                                         @forelse($activity as $value)
                                             <tr>
                                                 <td>{{ $value->id }}</td>
-                                                <td>{{ $value->slug }}</td>
                                                 <td>{{ $value->name }}</td>
-                                                <td>{{ $value->page_title }}</td>
                                                 <td>{{ $value->category->name }}</td>
-                                                <td>{{ $value->duration }}</td>
-                                                <td>{{ $value->start_time }}</td>
-                                                <td>{{ $value->cancellation_duration }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                         data-target="#descriptionModal"
                                                         data-description="{{ $value->description }}">
-                                                        View Description
+                                                        Description
                                                     </button>
                                                 </td>
                                                 <td>
@@ -54,7 +43,7 @@
                                                         data-target="#instructionModal"
                                                         data-instruction-base-url="{{ route('instruction-destroy', ['id' => 0]) }}"
                                                         data-instruction="{{ $value->instructions }}">
-                                                        view Instructions
+                                                        Instructions
                                                     </button>
                                                 </td>
                                                 <td>
@@ -62,19 +51,8 @@
                                                         data-target="#packageModal"
                                                         data-base-url="{{ route('packages-destroy', ['id' => 0]) }}"
                                                         data-package="{{ $value->packages }}">
-                                                        view Packages
+                                                        Packages
                                                     </button>
-                                                </td>
-                                                <td>
-                                                    @if (is_array($value->features))
-                                                        <ul>
-                                                            @foreach ($value->features as $feature)
-                                                                <li>{{ $feature }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @else
-                                                        {{ $value->features }}
-                                                    @endif
                                                 </td>
                                                 <td>
                                                     <div class="dropdown">
@@ -91,6 +69,10 @@
                                                                 onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this activity?')) document.getElementById('delete-form-{{ $value->id }}').submit();">Delete</a>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.activityimages', $value->id) }}">Images</a>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                                data-target="#detailsModal" data-activity='@json($value)'>
+                                                                View Details
+                                                            </a>
                                                             <form id="delete-form-{{ $value->id }}"
                                                                 action="{{ route('activities.destroy', $value->id) }}"
                                                                 method="POST" style="display: none;">
@@ -116,11 +98,10 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width:80%; max-width: 80%;
-    height: 100%;">
+
+<!-- Modal -->
+    <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:80%; max-width: 80%; height: 100%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="descriptionModalLabel">Activity Description</h5>
@@ -139,10 +120,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="instructionModal" tabindex="-1" role="dialog" aria-labelledby="instructionModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width:80%; max-width: 80%;
-    height: 100%;">
+    <div class="modal fade" id="instructionModal" tabindex="-1" role="dialog" aria-labelledby="instructionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:80%; max-width: 80%; height: 100%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="instructionModalLabel">Activity Instructions</h5>
@@ -174,10 +153,8 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="packageModal" tabindex="-1" role="dialog" aria-labelledby="packageModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width:80%; max-width: 80%;
-    height: 100%;">
+    <div class="modal fade" id="packageModal" tabindex="-1" role="dialog" aria-labelledby="packageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:80%; max-width: 80%; height: 100%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="packageModalLabel">Activity Packages</h5>
@@ -213,7 +190,30 @@
         </div>
     </div>
 
-
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width: 80%; max-width: 80%; height: 100%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Activity Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tbody id="modalDetailsContent">
+                            <!-- Details will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -221,7 +221,7 @@
                 var button = $(event.relatedTarget)
                 var description = button.data('description')
                 var modal = $(this)
-                modal.find('.modal-body').text(description)
+                modal.find('.modal-body').html(description)
             })
 
             $('#instructionModal').on('show.bs.modal', function(event) {
@@ -247,7 +247,6 @@
             });
 
             $('#packageModal').on('show.bs.modal', function(event) {
-
                 var button = $(event.relatedTarget);
                 var packages = button.data('package');
                 var baseUrl = button.data('base-url');
@@ -273,6 +272,27 @@
                     modalBody.find('#modalPackageContent').append(row);
                 });
             });
+
+            $('#detailsModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var activity = button.data('activity');
+                var modal = $(this);
+                var modalBody = modal.find('.modal-body tbody');
+
+                var detailsContent = `
+                    <tr><th>ID</th><td>${activity.id}</td></tr>
+                    <tr><th>URL</th><td>${activity.slug}</td></tr>
+                    <tr><th>Name</th><td>${activity.name}</td></tr>
+                    <tr><th>Page Title</th><td>${activity.page_title}</td></tr>
+                    <tr><th>Category</th><td>${activity.category.name}</td></tr>
+                    <tr><th>Duration</th><td>${activity.duration}</td></tr>
+                    <tr><th>Start Time</th><td>${activity.start_time}</td></tr>
+                    <tr><th>Cancellation Duration</th><td>${activity.cancellation_duration}</td></tr>
+                    <tr><th>Features</th><td>${Array.isArray(activity.features) ? activity.features.join(', ') : activity.features}</td></tr>
+                `;
+
+                modalBody.html(detailsContent);
+            });
         });
     </script>
 
@@ -280,6 +300,11 @@
         /* Custom styles to make the modal body scrollable */
         .modal-body {
             overflow-y: auto;
+        }
+
+        /* Custom styles to display data vertically */
+        .table th, .table td {
+            vertical-align: middle;
         }
     </style>
 @endsection

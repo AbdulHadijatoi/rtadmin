@@ -34,7 +34,7 @@ class BlogController extends Controller
     public function show($id)
     {
         return ExceptionHandlerHelper::tryCatch(function()use($id){
-            $data=Blog::with('contents','faqs')->findOrFail($id);
+            $data=Blog::with('contents','faqs')->where('slug',$id)->first();
             if ($data->banner_image) {
                 $data->banner_image_url = asset($data->banner_image);
             }

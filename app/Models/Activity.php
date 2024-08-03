@@ -95,7 +95,7 @@ class Activity extends Model
 
     }
 
-    protected $with = ['ActivityImages', 'packages', 'reviews', 'instructions'];
+    protected $with = ['ActivityImages', 'packages', 'reviews', 'instructions','category'];
 
     public function scopeActivity($query, $data)
     {

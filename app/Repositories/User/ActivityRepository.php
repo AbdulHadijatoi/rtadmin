@@ -44,6 +44,7 @@ class ActivityRepository implements ActivityInterface
         $activity = $this->model::where('slug',$slug)->first();
         if($activity->image){
             $activity->image_url=$activity->imagePath;
+            $activity->category_name=$activity->category?$activity->category->name:null;
         }
         return $activity;
     }

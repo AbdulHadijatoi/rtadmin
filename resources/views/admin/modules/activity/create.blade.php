@@ -403,7 +403,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="packageDescription0">Package Description</label>
-                                    <textarea class="form-control @error('highlight') is-invalid @enderror" id="packageDescription0" id="editor6"
+                                    <textarea class="form-control @error('highlight') is-invalid @enderror" id="packageDescription0"
                                         placeholder="Description" name="packages[0][highlight]" rows="6" cols="50"></textarea>
                                     @error('highlight')
                                         <span class="invalid-feedback" role="alert">
@@ -464,6 +464,9 @@
     <script>
         var activityform = $("#activity-form");
         $(document).ready(function() {
+            //editor6
+            var packageDescription0 = document.getElementById('packageDescription0');
+            initializeEditor2(packageDescription0);
             activityform.validate({
                 ignore: "",
                 rules: {
@@ -550,6 +553,19 @@
         );
 
         // Dynamic instructions script
+        function initializeEditor2(element) {
+            ClassicEditor
+                .create(element, {
+                    allowedContent: 'ul li',
+                    extraAllowedContent: '',
+                    removeButtons: 'NumberedList,Outdent,Indent,Blockquote',
+                    placeholder: 'Use bullet points to list items'
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             let instructionCount = 1;
 
@@ -574,9 +590,10 @@
                 `;
 
                 instructionsContainer.appendChild(newInstruction);
+                const newTextarea = newInstruction.querySelector('textarea');
+                initializeEditor2(newTextarea);
                 instructionCount++;
             });
-
 
             let featureCount = 1; // Start with the count of initial features
 
@@ -592,8 +609,6 @@
                 featuresContainer.appendChild(newFeature);
                 featureCount++;
             });
-
-
         });
     </script>
 
@@ -677,6 +692,9 @@
                     '</div>' +
                     '</div>';
                 $("#packages-container").append(newPackageItem);
+
+                var newTextarea = document.getElementById('packageDescription' + itemCount);
+                initializeEditor2(newTextarea);
             });
 
 

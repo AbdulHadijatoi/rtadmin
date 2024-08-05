@@ -60,6 +60,19 @@
 </div>
 
 <script>
+    function initializeEditor2(element) {
+        ClassicEditor
+            .create(element, {
+                allowedContent: 'ul li',
+                extraAllowedContent: '',
+                removeButtons: 'NumberedList,Outdent,Indent,Blockquote',
+                placeholder: 'Use bullet points to list items'
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         let contentIndex = 0;
         let faqIndex = 0;
@@ -74,7 +87,7 @@
                 </div>
                 <div class="form-group">
                     <label for="content_descriptions[]">Content Description</label>
-                    <textarea class="form-control" rows="6" cols="50" id="editor6" name="content_descriptions[]" rows="3" required></textarea>
+                    <textarea class="form-control" rows="6" cols="50" id="editor6" name="content_descriptions[]" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="content_images[]">Content Image</label>
@@ -83,6 +96,8 @@
                 </div>
             `;
             document.getElementById('contents').appendChild(contentGroup);
+            const newTextarea2 = contentGroup.querySelector('textarea');
+            initializeEditor2(newTextarea2);
             contentIndex++;
         });
 
@@ -96,7 +111,7 @@
                 </div>
                 <div class="form-group">
                     <label for="faqs[${faqIndex}][answer]">Answer</label>
-                    <textarea class="form-control" name="faqs[${faqIndex}][answer]" rows="3" required></textarea>
+                    <textarea class="form-control" name="faqs[${faqIndex}][answer]" rows="3"></textarea>
                 </div>
             `;
             document.getElementById('faqs').appendChild(faqGroup);

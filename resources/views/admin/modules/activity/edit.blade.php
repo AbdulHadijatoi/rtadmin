@@ -372,8 +372,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="packageDescription{{ $index }}">Package Description</label>
-                                            <textarea class="form-control" id="packageDescription{{ $index }}" placeholder="Description" id="editor6"
+                                            <textarea class="form-control pkgdescriptions" id="packageDescription{{ $index }}" placeholder="Description"
                                                 name="packages[{{ $index }}][highlight]" rows="6" cols="50">{{ $package->highlight }}</textarea>
+
                                         </div>
                                     </div>
                                 @endforeach
@@ -424,7 +425,29 @@
     @include('admin.layouts.components.filepond.js')
     <script>
         var activityform = $("#activity-form");
+        function initializeEditor2(element) {
+                ClassicEditor
+                    .create(element, {
+                        allowedContent: 'ul li',
+                        extraAllowedContent: '',
+                        removeButtons: 'NumberedList,Outdent,Indent,Blockquote',
+                        placeholder: 'Use bullet points to list items'
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+        function initializeAllEditors() {
+            document.querySelectorAll('.pkgdescriptions').forEach(textarea => {
+                initializeEditor2(textarea);
+            });
+        }
+
         $(document).ready(function() {
+            // Dynamic instructions script
+            
+            initializeAllEditors();
             activityform.validate({
                 ignore: "",
                 rules: {
@@ -603,6 +626,10 @@
                         handleCategoryChange(this);
                     });
 
+                    // Initialize CKEditor for the new textarea
+                    var newPkgTextarea = document.getElementById('packageDescription' + packageIndex);
+                    initializeEditor2(newPkgTextarea);
+
                     packageIndex++;
                 });
 
@@ -643,7 +670,12 @@
 
                 var instructionContainer = document.createElement('div');
                 instructionContainer.innerHTML = instructionItem;
+
                 document.querySelector('.instruction-item').parentNode.appendChild(instructionContainer);
+
+                // Initialize CKEditor for the new textarea
+                var newTextarea = instructionContainer.querySelector('textarea');
+                initializeEditor2(newTextarea);
             });
         </script>
     @endif

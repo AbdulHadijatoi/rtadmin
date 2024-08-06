@@ -101,60 +101,64 @@ class BlogController extends Controller
     }
 
     public function update(Request $request, Blog $blog)
-{
-    $blogData = [
-        'title' => $request->input('title'),
-        'description' => $request->input('description'),
-    ];
+    {
+        $blogData = [
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+        ];
 
-    if ($request->hasFile('banner_image')) {
-        if ($blog->banner_image && file_exists(public_path($blog->banner_image))) {
-            unlink(public_path($blog->banner_image));
-        }
-        $bannerImage = $request->file('banner_image');
-        $bannerImageName = uniqid() . '.' . $bannerImage->getClientOriginalExtension();
-        $bannerImagePath = $bannerImage->move(public_path('blog'), $bannerImageName);
-        $blogData['banner_image'] = 'blog/' . $bannerImageName;
-    }
-
-    $blog->update($blogData);
-
-    if ($request->has('content_titles')) {
-        $contentTitles = $request->input('content_titles');
-        $contentDescriptions = $request->input('content_descriptions');
-        $contentImages = $request->file('content_images');
-
-        foreach ($contentTitles as $index => $title) {
-            $content = $blog->contents[$index] ?? new BlogContent();
-
-            $content->title = $title;
-            $content->description = $contentDescriptions[$index];
-
-            if (isset($contentImages[$index])) {
-                if ($content->image && file_exists(public_path($content->image))) {
-                    unlink(public_path($content->image));
-                }
-                $contentImage = $contentImages[$index];
-                $contentImageName = uniqid() . '.' . $contentImage->getClientOriginalExtension();
-                $contentImagePath = $contentImage->move(public_path('blog_contents'), $contentImageName);
-                $content->image = 'blog_contents/' . $contentImageName;
+        if ($request->hasFile('banner_image')) {
+            if ($blog->banner_image && file_exists(public_path($blog->banner_image))) {
+                unlink(public_path($blog->banner_image));
             }
-
-            $blog->contents()->save($content);
+            $bannerImage = $request->file('banner_image');
+            $bannerImageName = uniqid() . '.' . $bannerImage->getClientOriginalExtension();
+            $bannerImagePath = $bannerImage->move(public_path('blog'), $bannerImageName);
+            $blogData['banner_image'] = 'blog/' . $bannerImageName;
         }
-    }
 
-    if ($request->has('faqs')) {
-        foreach ($request->input('faqs') as $index => $faqData) {
-            $faq = $blog->faqs[$index] ?? new Faq();
-            $faq->question = $faqData['question'];
-            $faq->answer = $faqData['answer'];
-            $blog->faqs()->save($faq);
+        $blog->update($blogData);
+
+        if ($request->has('content_titles')) {
+            $contentTitles = $request->input('content_titles');
+            $contentDescriptions = $request->input('content_descriptions');
+            $contentImages = $request->file('content_images');
+
+            foreach ($contentTitles as $index => $title) {
+                $content = $blog->contents[$index] ?? new BlogContent();
+
+                $content->title = $title;
+                $content->description = $contentDescriptions[$index];
+
+                if (isset($contentImages[$index])) {
+                    if ($content->image && file_exists(public_path($content->image))) {
+                        unlink(public_path($content->image));
+                    }
+                    $contentImage = $contentImages[$index];
+                    $contentImageName = uniqid() . '.' . $contentImage->getClientOriginalExtension();
+                    $contentImagePath = $contentImage->move(public_path('blog_contents'), $contentImageName);
+                    $content->image = 'blog_contents/' . $contentImageName;
+                }
+
+                $blog->contents()->save($content);
+            }
         }
-    }
 
-    return redirect()->route('blogs.index')->with('success', 'Blog updated successfully');
-}
+        if ($request->has('faqs')) {
+            $faqs = $request->input('faqs');
+    
+            foreach ($faqs as $index => $faqData) {
+                $faq = $blog->faqs[$index] ?? new Faq();
+    
+                $faq->question = $faqData['question'];
+                $faq->answer = $faqData['answer'];
+    
+                $blog->faqs()->save($faq);
+            }
+        }
+
+        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully');
+    }
 
 
     public function destroy(Blog $blog)

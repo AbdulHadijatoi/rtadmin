@@ -61,7 +61,20 @@
                         <div class="form-group">
                             <h4>FAQs</h4>
                             <div id="faqs">
-                                <!-- Existing FAQ items will be appended here -->
+                                @if($faqs)
+                                    @foreach ($faqs as $index => $faq)
+                                        <div class="faq-group">
+                                            <div class="form-group">
+                                                <label for="faqs[{{ $index }}][question]">Question</label>
+                                                <input type="text" class="form-control" name="faqs[{{ $index }}][question]" value="{{ $faq->question }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="faqs[{{ $index }}][answer]">Answer</label>
+                                                <textarea class="form-control" name="faqs[{{ $index }}][answer]" rows="3" required>{{ $faq->answer }}</textarea>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <button type="button" class="btn btn-success" id="add-faq">Add FAQ</button>
                         </div>

@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\{
 use App\Http\Controllers\Api\Auth\{
    ForgotPasswordController,
 };
-
+use App\Http\Controllers\Api\SubscriptionController;
 
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
 Route::post('verify-otp', [ForgotPasswordController::class, 'verifyOTP']);
@@ -72,6 +72,7 @@ Route::post('/stripe',[StripePaymentController::class,'createPaymentIntent']);
 Route::post('user/apply/voucher', [GiftCardController::class, 'applyVoucher'])->name('user.voucher');
  //expire voucher
  Route::post('user/expire/voucher', [GiftCardController::class, 'expireVoucher'])->name('user.voucher');
+ Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
 
 Route::middleware(['auth:sanctum'])->prefix('user')->group( function () {
 

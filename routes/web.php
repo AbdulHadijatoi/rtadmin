@@ -18,8 +18,8 @@ use App\Http\Controllers\Admin\{
     CouponController,
     SettingController,
     MenuController,
-    ReviewsController
-
+    ReviewsController,
+    SubscriptionController
 };
 use App\Http\Controllers\Api\User\OrderController;
 use App\Http\Controllers\Admin\Setting\{
@@ -104,6 +104,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
 
     /*Blog*/
     Route::resource('blogs',BlogController::class);
+    Route::resource('subscription',SubscriptionController::class);
     Route::get('blogs/contents/{blog}',   [BlogController::class, 'viewContents'])->name('blogs.contents');
     Route::get('blogs/faqs/{blog}',       [BlogController::class, 'viewFaqs'])->name('blogs.faqs');
     Route::get('/contents/edit{content}', [BlogController::class, 'editContents'])->name('contents.edit');

@@ -91,6 +91,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('subscription.index') }}" aria-controls="tables">
+                <i class="typcn typcn-document-text menu-icon"></i>
+                <span class="menu-title">Subscribers</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.bookings') }}" aria-controls="tables">
                 <i class="typcn typcn-bookmark menu-icon"></i>
                 <span class="menu-title">Bookings</span>

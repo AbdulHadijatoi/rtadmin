@@ -37,7 +37,22 @@
                         <div class="form-group">
                             <h4>Contents</h4>
                             <div id="contents">
-                                <!-- Existing content items will be appended here -->
+                                @if($contents)
+                                    @foreach($contents as $index => $content)
+                                        <div class="form-group">
+                                            <label for="content_titles[]">Content Title</label>
+                                            <input type="text" class="form-control" name="content_titles[]" value="{{ $content->title }}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="content_descriptions[]">Content Description</label>
+                                            <textarea class="form-control content-descriptions" name="content_descriptions[]" rows="3">{{ $content->description }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="content_images[]">Content Image</label>
+                                            <input type="file" class="form-control" name="content_images[]" accept="image/*">
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <button type="button" class="btn btn-success mt-2" id="add-content">Add Content</button>
                         </div>
@@ -73,9 +88,17 @@
             });
     }
 
+    function initializeAllEditors() {
+        document.querySelectorAll('.content-descriptions').forEach(textarea => {
+            initializeEditor2(textarea);
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         let contentIndex = 0;
         let faqIndex = 0;
+
+        initializeAllEditors();
 
         document.getElementById('add-content').addEventListener('click', function () {
             const contentGroup = document.createElement('div');

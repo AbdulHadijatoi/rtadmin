@@ -303,8 +303,8 @@
                                                 </span>
                                             @enderror
                                             <label for="exampleInputName1" class="mt-1">Description</label>
-                                            <textarea name="instructions[{{ $index }}][instruction_description]" id="editor5"
-                                                class="form-control @error('instructions.' . $index . '.instruction_description') is-invalid @enderror"
+                                            <textarea name="instructions[{{ $index }}][instruction_description]"
+                                                class="form-control inst_descriptions @error('instructions.' . $index . '.instruction_description') is-invalid @enderror"
                                                 placeholder="Instruction Description" rows="6" cols="50">{{ $instruction->instruction_description }}</textarea>
                                             @error('instructions.' . $index . '.instruction_description')
                                                 <span class="invalid-feedback" role="alert">
@@ -440,6 +440,10 @@
 
         function initializeAllEditors() {
             document.querySelectorAll('.pkgdescriptions').forEach(textarea => {
+                initializeEditor2(textarea);
+            });
+            
+            document.querySelectorAll('.inst_descriptions').forEach(textarea => {
                 initializeEditor2(textarea);
             });
         }

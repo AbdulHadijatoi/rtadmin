@@ -66,7 +66,7 @@
             <tr>
                 <td class="float-left" style="width: 230px;">
                 
-                    <img src="https://pacific-adventures.com/logo.png" alt="Main Logo" width="120px" style="display: block; margin-bottom: 20px;">
+                    <img src="https://adminrah51786.rahtours.ae/logo.png" alt="Main Logo" width="120px" style="display: block; margin-bottom: 20px;">
                 </td>
                 <td class="float-right" style="width: 230px;"></td>
                 <td class="float-right" style="width: 230px;"></td>
@@ -210,7 +210,7 @@
             <tr>
                 <td class="float-left text-bold" colspan="3">
                     <span>
-                        Pacific Adventures L.L.C
+                        RAH Tourism LLC
                     </span>
                 </td>
             </tr>
@@ -221,12 +221,12 @@
                     Dubai U.A.E
                 </td>
                 <td class="float-left text-center" colspan="1" style="min-height: 50px; border-left: 1px solid black; border-right: 1px solid black;">
-                    Phone: +971 58 862 7171<br>
-                    booking@pacific-adventures.com<br>
-                    www.pacific-adventures.com
+                    Phone: +971 52 933 1100<br>
+                    bookings@rahtours.ae<br>
+                    www.rahtours.ae
                 </td>
                 <td class="float-left text-right" colspan="1" style="min-height: 50px;">
-                    Pacific Adventures L.L.C
+                    RAH Tourism LLC
                 </td>
             </tr>
 

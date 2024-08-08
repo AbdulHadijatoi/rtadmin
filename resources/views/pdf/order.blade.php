@@ -79,7 +79,7 @@
                 </td>
                 <td class="float-right"></td>
                 <td class="float-right text-right" style="width: 230px;">
-                    <span>Document Date: {{ now()->format('M d, Y') }}<span>
+                    <span>Document Date: {{ $order->date??'' }}<span>
                 </td>
             </tr>
             

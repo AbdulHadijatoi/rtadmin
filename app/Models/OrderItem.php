@@ -16,7 +16,8 @@ class OrderItem extends Model
         'total_price',
         'package_category',
         'package_id',
-        'order_id'
+        'order_id',
+        'booking_date'
     ];
 
     public function package()

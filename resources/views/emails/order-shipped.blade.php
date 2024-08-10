@@ -50,7 +50,7 @@
         <p><span class="highlight">Title:</span> {{ $order->title }}</p>
         <p><span class="highlight">Nationality:</span> {{ $order->nationality }}</p>
         <p><span class="highlight">Phone Number:</span> {{ $order->phone }}</p>
-        <p><span class="highlight">Date:</span> {{ $order->date }}</p>
+        {{-- <p><span class="highlight">Date:</span> {{ $order->date }}</p> --}}
         <p><span class="highlight">Status:</span> {{ $order->status }}</p>
         <p><span class="highlight">Total Amount:</span> {{ $order->total_amount }}</p>
         <p><span class="highlight">Pickup Location:</span> {{ $order->pickup_location }}</p>
@@ -68,6 +68,7 @@
                             <p class="card-text">Infants: {{ $item->infant }}</p>
                             <p class="card-text">Total Price: {{ $item->total_price }}</p>
                             <p class="card-text">Package Category: {{ $item->package_category }}</p>
+                            <p class="card-text">Booking Date: {{ $item->booking_date }}</p>
                         </div>
                     </div>
                 @empty

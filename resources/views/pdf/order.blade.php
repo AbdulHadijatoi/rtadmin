@@ -79,7 +79,7 @@
                 </td>
                 <td class="float-right"></td>
                 <td class="float-right text-right" style="width: 230px;">
-                    <span>Document Date: {{ $order->date??'' }}<span>
+                    <span>Document Date: {{ now()->format('M d, Y') }}<span>
                 </td>
             </tr>
             
@@ -141,7 +141,7 @@
                                     @endphp
                                     {{ $option->package_title }}
                             </span><br>
-                            <span>Tour date: {{ $booking_date? Carbon\Carbon::parse($booking_date)->format('M d, Y'): '' }}, Participants: {{ $total_participants }}</span>
+                            <span>Tour date: {{ $option->booking_date? Carbon\Carbon::parse($option->booking_date)->format('M d, Y'): '' }}, Participants: {{ $total_participants }}</span>
                         </td>
                         <td class="float-right text-bold text-right" colspan="1" style="width: 230px; vertical-align: top;">{{ number_format($option->total_price, 2) }}</td>
                     </tr>

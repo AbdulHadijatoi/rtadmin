@@ -80,6 +80,7 @@ class OrderRepository
                     'package_category'=>$package->category,
                     'package_id'=>$packageId,
                     'order_id'=>$orderDetail->id,
+                    'booking_date'=>$item['date'],
                 ]);
 
 

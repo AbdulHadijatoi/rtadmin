@@ -66,10 +66,10 @@ class OrderRepository
             'status' => $data['payment'],
             'user_id'=>$userId ?? null,
         ]);
-        //dd( $orderDetail);
+        dd( $data);
         if ($data['package_details'] && is_array($data['package_details'])) {
             foreach ($data['package_details'] as $item) {
-                $packageId = isset($item['package_id']) ?? isset($item['id']);
+                $packageId = $item['package_id'] ?? $item['id'];
                 $package=Package::findOrFail($packageId);
                OrderItem::create([
                     'adult'=> $item['adult'] ?? null,

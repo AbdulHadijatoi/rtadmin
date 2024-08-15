@@ -69,7 +69,7 @@ class OrderRepository
         //dd( $orderDetail);
         if ($data['package_details'] && is_array($data['package_details'])) {
             foreach ($data['package_details'] as $item) {
-                $packageId = $item['package_id'] ?? null;
+                $packageId = $item['package_id'] ?? $item['id'];
                 $package=Package::findOrFail($packageId);
                OrderItem::create([
                     'adult'=> $item['adult'] ?? null,

@@ -66,7 +66,7 @@ class OrderRepository
             'status' => $data['payment'],
             'user_id'=>$userId ?? null,
         ]);
-        dd( $data);
+        return $data;
         if ($data['package_details'] && is_array($data['package_details'])) {
             foreach ($data['package_details'] as $item) {
                 $packageId = $item['package_id'] ?? $item['id'];

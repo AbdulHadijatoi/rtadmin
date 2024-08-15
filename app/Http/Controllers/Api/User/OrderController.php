@@ -43,6 +43,7 @@ class OrderController extends Controller
     }
     public function orderDetailStore(OrderRequest $request)
     {
+        return $request->all();
         return ExceptionHandlerHelper::tryCatch(function () use ($request) {
             $data = array_merge($request->all());
             $order = $this->orderRepository->storeOrder($data);

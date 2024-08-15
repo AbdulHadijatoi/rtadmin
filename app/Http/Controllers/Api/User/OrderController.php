@@ -43,7 +43,7 @@ class OrderController extends Controller
     }
     public function orderDetailStore(OrderRequest $request)
     {
-        return $request->package_details;
+        return $request->all()['package_details']['id'];
         $package=Package::findOrFail();
         return ExceptionHandlerHelper::tryCatch(function () use ($request) {
             $data = array_merge($request->all());

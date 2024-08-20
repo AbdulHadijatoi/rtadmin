@@ -75,6 +75,7 @@ class OrderRepository
                     'adult'=> $item['adult'] ?? null,
                     'child'=>$item['child'] ?? null,
                     'infant'=>$item['infant'] ?? null,
+                    'groups'=>$item['groups'] ?? null,
                     'total_price'=>$item['price'] ?? null,
                     'package_title'=>$package->title,
                     'package_category'=>$package->category,

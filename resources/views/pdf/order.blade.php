@@ -137,7 +137,11 @@
                             <span>Activity Name: {{ $activity_name }}</span><br>
                             <span>Option Booked: 
                                     @php
-                                        $total_participants = $option->infant + $option->child + $option->adult;
+                                        if($option->package_category && $option->package_category == "private"){
+                                            $total_participants = $option->group_size;
+                                        }else{
+                                            $total_participants = $option->infant + $option->child + $option->adult;
+                                        }
                                     @endphp
                                     {{ $option->package_title }}
                             </span><br>

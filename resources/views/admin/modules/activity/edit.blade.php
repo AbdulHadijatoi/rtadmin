@@ -354,6 +354,15 @@
                                                 name="packages[{{ $index }}][price]"
                                                 value="{{ $package->price }}">
                                         </div>
+                                        
+                                        <div class="form-group" id="groupSizeGroup{{ $index }}">
+                                            <label for="groupSizeInput{{ $index }}">Package Group Size</label>
+                                            <input type="number" class="form-control"
+                                                id="groupSizeInput{{ $index }}" placeholder="Group Size"
+                                                name="packages[{{ $index }}][group_size]"
+                                                value="{{ $package->group_size }}">
+                                        </div>
+                                        
                                         <div class="form-group" id="adultPriceGroup{{ $index }}"
                                             style="display: none;">
                                             <label for="adultPriceInput{{ $index }}">Package Adult Price</label>
@@ -558,19 +567,23 @@
                     var itemCount = $(categorySelect).attr('id').replace('categorySelect', '');
                     var selectedCategory = $(categorySelect).val();
                     var priceGroup = $("#priceGroup" + itemCount);
+                    var groupSizeGroup = $("#groupSizeGroup" + itemCount);
                     var adultPriceGroup = $("#adultPriceGroup" + itemCount);
                     var childPriceGroup = $("#childPriceGroup" + itemCount);
 
                     if (selectedCategory === 'private') {
                         priceGroup.show();
+                        groupSizeGroup.show();
                         adultPriceGroup.hide();
                         childPriceGroup.hide();
                     } else if (selectedCategory === 'sharing') {
                         priceGroup.hide();
+                        groupSizeGroup.hide();
                         adultPriceGroup.show();
                         childPriceGroup.show();
                     } else {
                         priceGroup.hide();
+                        groupSizeGroup.hide();
                         adultPriceGroup.hide();
                         childPriceGroup.hide();
                     }
@@ -607,6 +620,12 @@
                     <label for="priceInput${packageIndex}">Package Price</label>
                     <input type="number" class="form-control" id="priceInput${packageIndex}" placeholder="Price" name="packages[${packageIndex}][price]">
                 </div>
+
+                <div class="form-group" id="groupSizeGroup${packageIndex}">
+                    <label for="groupSizeInput${packageIndex}">Package Group Size</label>
+                    <input type="number" class="form-control" id="groupSizeInput${packageIndex}" placeholder="Group Size" name="packages[${packageIndex}][group_size]">
+                </div>
+
                 <div class="form-group" id="adultPriceGroup${packageIndex}" style="display:none;">
                     <label for="adultPriceInput${packageIndex}">Package Adult Price</label>
                     <input type="number" class="form-control" id="adultPriceInput${packageIndex}" placeholder="Adult Price" name="packages[${packageIndex}][adult_price]">

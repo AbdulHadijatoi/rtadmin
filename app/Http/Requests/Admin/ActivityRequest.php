@@ -55,6 +55,7 @@ class ActivityRequest extends FormRequest
             'packages.*.title' => 'required|string',
             'packages.*.category' => 'required|string',
             'packages.*.price' => 'nullable|integer',
+            'packages.*.group_size' => 'nullable|integer',
             'packages.*.adult_price' => 'nullable|integer',
             'packages.*.child_price' => 'nullable|integer',
             'packages.*.highlight' => 'required|string',

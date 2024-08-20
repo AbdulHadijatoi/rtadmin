@@ -93,6 +93,7 @@ class ActivityController extends Controller
         $package = Package::create([
             'title' => $data['title'],
             'price' => $data['price'],
+            'group_size' => $data['group_size'],
             'adult_price' => $data['adult_price'],
             'child_price' => $data['child_price'],
             'highlight' => $data['highlight'],
@@ -173,6 +174,7 @@ class ActivityController extends Controller
                     'category' => $packageData['category'],
                     'title' => $packageData['title'],
                     'price' => $packageData['category'] == 'private' ? $packageData['price'] : null,
+                    'group_size' => $packageData['category'] == 'private' ? $packageData['group_size'] : null,
                     'adult_price' => $packageData['category'] == 'sharing' ? $packageData['adult_price'] : null,
                     'child_price' => $packageData['category'] == 'sharing' ? $packageData['child_price'] : null,
                     'highlight' => $packageData['highlight'],
@@ -185,6 +187,7 @@ class ActivityController extends Controller
                     'category' => $packageData['category'],
                     'title' => $packageData['title'],
                     'price' => $packageData['category'] == 'private' ? $packageData['price'] : null,
+                    'group_size' => $packageData['category'] == 'private' ? $packageData['group_size'] : null,
                     'adult_price' => $packageData['category'] == 'sharing' ? $packageData['adult_price'] : null,
                     'child_price' => $packageData['category'] == 'sharing' ? $packageData['child_price'] : null,
                     'highlight' => $packageData['highlight'],

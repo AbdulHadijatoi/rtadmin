@@ -14,6 +14,7 @@ class Package extends Model
         'title',
         'highlight',
         'price',
+        'group_size',
         'adult_price',
         'child_price',
         'category'

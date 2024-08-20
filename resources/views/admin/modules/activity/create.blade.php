@@ -371,6 +371,16 @@
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group" id="groupSizeGroup0">
+                                    <label for="groupSizeInput0">Group Size (Max no. of people)</label>
+                                    <input type="number" class="form-control @error('group_size') is-invalid @enderror"
+                                        id="groupSizeInput0" placeholder="Group Size" name="packages[0][group_size]">
+                                    @error('group_size')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <div class="form-group" id="priceGroup0">
                                     <label for="priceInput0">Package Price</label>
                                     <input type="number" class="form-control @error('price') is-invalid @enderror"
@@ -647,6 +657,18 @@
                     '</span>' +
                     '@enderror' +
                     '</div>' +
+                    
+                    '<div class="form-group" id="groupSizeGroup' + itemCount + '">' +
+                    '<label for="groupSizeInput' + itemCount + '">Group Size (Max no. of people)</label>' +
+                    '<input type="number" class="form-control @error('group_size') is-invalid @enderror" id="groupSizeInput' +
+                    itemCount + '" placeholder="Group Size" name="packages[' + itemCount + '][group_size]">' +
+                    '@error('group_size')' +
+                    '<span class="invalid-feedback" role="alert">' +
+                    '<strong>{{ $message }}</strong>' +
+                    '</span>' +
+                    '@enderror' +
+                    '</div>' +
+
                     '<div class="form-group" id="priceGroup' + itemCount + '">' +
                     '<label for="priceInput' + itemCount + '">Package Price</label>' +
                     '<input type="number" class="form-control @error('price') is-invalid @enderror" id="priceInput' +
@@ -657,6 +679,7 @@
                     '</span>' +
                     '@enderror' +
                     '</div>' +
+                    
                     '<div class="form-group" id="adultPriceGroup' + itemCount + '" style="display:none;">' +
                     '<label for="adultPriceInput' + itemCount + '">Package Adult Price</label>' +
                     '<input type="number" class="form-control @error('adult_price') is-invalid @enderror" id="adultPriceInput' +
@@ -703,19 +726,23 @@
                 console.log(itemCount);
                 var selectedCategory = $(this).val();
                 var priceGroup = $("#priceGroup" + itemCount);
+                var groupSizeGroup = $("#groupSizeGroup" + itemCount);
                 var adultPriceGroup = $("#adultPriceGroup" + itemCount);
                 var childPriceGroup = $("#childPriceGroup" + itemCount);
 
                 if (selectedCategory === 'private') {
                     priceGroup.show();
+                    groupSizeGroup.show();
                     adultPriceGroup.hide();
                     childPriceGroup.hide();
                 } else if (selectedCategory === 'sharing') {
                     priceGroup.hide();
+                    groupSizeGroup.hide();
                     adultPriceGroup.show();
                     childPriceGroup.show();
                 } else {
                     priceGroup.hide();
+                    groupSizeGroup.hide();
                     adultPriceGroup.hide();
                     childPriceGroup.hide();
                 }

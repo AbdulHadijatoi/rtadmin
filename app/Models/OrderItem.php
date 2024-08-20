@@ -12,6 +12,7 @@ class OrderItem extends Model
         'adult',
         'child',
         'infant',
+        'groups',
         'package_title',
         'total_price',
         'package_category',

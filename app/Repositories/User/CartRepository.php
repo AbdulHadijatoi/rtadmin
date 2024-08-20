@@ -18,6 +18,7 @@ class CartRepository
                 'child'=>$data['child'] ?? null,
                 'infant'=>$data['infant'] ?? null,
                 'price'=>$data['price'],
+                'group_size'=>$data['group_size'] ?? null,
             ]);
 
 
@@ -41,6 +42,7 @@ class CartRepository
                 'child' => $data['child'] ?? $cartItem->child,
                 'infant' => $data['infant'] ?? $cartItem->infant,
                 'price' => $data['price'] ?? $cartItem->price,
+                'group_size' => $data['group_size'] ?? $cartItem->group_size,
             ];
             $cartItem->update($fieldsToUpdate);
         }

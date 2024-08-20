@@ -18,6 +18,7 @@ class CartItem extends Model
         'child',
         'infant',
         'price',
+        'group_size',
     ];
 
     protected $casts = [

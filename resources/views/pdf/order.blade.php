@@ -138,7 +138,7 @@
                             <span>Option Booked: 
                                     @php
                                         if($option->package_category && $option->package_category == "private"){
-                                            $total_participants = $option->group_size;
+                                            $total_participants = $option->group * ($option->package?$option->package->group_size:1);
                                         }else{
                                             $total_participants = $option->infant + $option->child + $option->adult;
                                         }

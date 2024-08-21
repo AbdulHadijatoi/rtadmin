@@ -63,9 +63,14 @@
                     <div class="card mb-3  shadow bg-light">
                         <div class="card-body">
                             <h5 class="card-title">Package: {{ $item->package_title }}</h5>
-                            <p class="card-text">Adults: {{ $item->adult }}</p>
-                            <p class="card-text">Children: {{ $item->child }}</p>
-                            <p class="card-text">Infants: {{ $item->infant }}</p>
+                            @if($item->package_category == 'sharing')
+                                <p class="card-text">Adults: {{ $item->adult }}</p>
+                                <p class="card-text">Children: {{ $item->child }}</p>
+                                <p class="card-text">Infants: {{ $item->infant }}</p>
+                            @else
+                                <p class="card-text">Groups: {{ $item->groups }}</p>
+                                <p class="card-text">Per Group People: {{ $item->package?$item->package->group_size:1 }}</p>
+                            @endif
                             <p class="card-text">Total Price: {{ $item->total_price }}</p>
                             <p class="card-text">Package Category: {{ $item->package_category }}</p>
                             <p class="card-text">Booking Date: {{ $item->booking_date }}</p>

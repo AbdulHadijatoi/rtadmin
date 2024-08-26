@@ -20,7 +20,7 @@ class ActivityRepository implements ActivityInterface
 
     public function index()
     {
-        $activity = $this->model::all();
+        $activity = $this->model::orderBy('created_at', 'desc')->get();
         foreach($activity as $item)
         {
             if($item->image) {
